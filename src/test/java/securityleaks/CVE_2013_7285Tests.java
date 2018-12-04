@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 public class CVE_2013_7285Tests {
 
     @Test
-    @DisplayName("On success, it should throw XStream Conversion Exception")
+    @DisplayName("On success, it should throw ConversionException Conversion Exception")
     void injectThroughEventHandlerWhenDeserializeToPojo() {
 
         XStream xstream = new XStream();
@@ -44,7 +44,7 @@ public class CVE_2013_7285Tests {
     }
 
     @Test
-    @DisplayName("On success, it should throw XStream Conversion Exception")
+    @DisplayName("On success, it should throw ConversionException Conversion Exception")
     void injectThroughEventHandlerOnJavaCollectionWhenDeserializeToPojo() {
 
         XStream xstream = new XStream();
