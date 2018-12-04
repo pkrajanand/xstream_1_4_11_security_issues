@@ -1,6 +1,6 @@
 # Overview
 
-This repository contains the junit tests to demonstrate how XStream v1.4.9 respond to the security issues http://x-stream.github.io/CVE-2013-7285.html and http://x-stream.github.io/CVE-2017-7957.html.
+This repository contains the junit tests to demonstrate how XStream v1.4.11 respond to the security issues http://x-stream.github.io/CVE-2013-7285.html and http://x-stream.github.io/CVE-2017-7957.html.
 
 # Summary on behaviour through v1.4.7 to v1.4.11.1
 
