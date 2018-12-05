@@ -1,10 +1,10 @@
 package securityleaks;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.ConversionException;
-import com.thoughtworks.xstream.security.ForbiddenClassException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -29,10 +29,13 @@ public class CVE_2017_7957Tests {
 
         XStream xstream = new XStream();
 
-        assertThrows(ConversionException.class,
+        ConversionException conversionException = assertThrows(ConversionException.class,
                      ()->{
                          xstream.fromXML("<void/>");
-                     });
+                     }
+                     );
+
+        assertThat(conversionException).hasMessageContaining("Security alert. Unmarshalling rejected");
     }
 
     @Test
@@ -41,10 +44,11 @@ public class CVE_2017_7957Tests {
 
         XStream xstream = new XStream();
 
-        assertThrows(ConversionException.class,
+        ConversionException conversionException = assertThrows(ConversionException.class,
                      ()->{
                          xstream.fromXML("<string class='void'>Hello, world!</string>");
                      });
+        assertThat(conversionException).hasMessageContaining("Security alert. Unmarshalling rejected");
     }
 
 }
