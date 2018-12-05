@@ -14,11 +14,12 @@ However, it broke the java runtime environments below JDK 8.0. So, v1.4.11.1 is 
 # References
 
 1. http://x-stream.github.io/
-2. http://x-stream.github.io/changes.html
-3. http://x-stream.github.io/CVE-2017-7957.html
-4. http://x-stream.github.io/CVE-2013-7285.html
-5. https://github.com/x-stream/xstream/issues/73 - An open issue seemed to exist for a long time with HibernateMapper
-6. http://www.pwntester.com/blog/2013/12/23/rce-via-xstream-object-deserialization38/ - blog that details the means to reproduce the violated cases 
-7. https://github.com/x-stream/xstream/issues/133 -  Issue caused for v1.4.11.1 release
+2. http://x-stream.github.io/security.html
+3. http://x-stream.github.io/changes.html
+4. http://x-stream.github.io/CVE-2017-7957.html
+5. http://x-stream.github.io/CVE-2013-7285.html
+6. https://github.com/x-stream/xstream/issues/73 - An open issue seemed to exist for a long time with HibernateMapper
+7. http://www.pwntester.com/blog/2013/12/23/rce-via-xstream-object-deserialization38/ - blog that details the means to reproduce the violated cases 
+8. https://github.com/x-stream/xstream/issues/133 -  Issue caused for v1.4.11.1 release
 
   
