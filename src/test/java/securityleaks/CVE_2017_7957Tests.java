@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.ConversionException;
+import com.thoughtworks.xstream.security.ForbiddenClassException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -29,13 +30,25 @@ public class CVE_2017_7957Tests {
 
         XStream xstream = new XStream();
 
-        ConversionException conversionException = assertThrows(ConversionException.class,
-                     ()->{
+        /**
+         * This requires to avoid XStream to log a warning "Security framework of XStream instance already initialized"
+         *
+         * An excerpt from XStream 1.4.11 documentation:-
+         *
+         * This method is a pure helper method for XStream 1.4.x. It initializes an XStream instance with a white list of
+         * well-known and simply types of the Java runtime as it is done in XStream 1.5.x by default. This method will do
+         * therefore nothing in XStream 1.5.
+         *
+         */
+        XStream.setupDefaultSecurity(xstream);
+
+        ForbiddenClassException forbiddenClassException = assertThrows(ForbiddenClassException.class,
+                                                                   ()->{
                          xstream.fromXML("<void/>");
                      }
                      );
 
-        assertThat(conversionException).hasMessageContaining("Security alert. Unmarshalling rejected");
+        assertThat(forbiddenClassException).hasMessageContaining("void");
     }
 
     @Test
@@ -43,12 +56,23 @@ public class CVE_2017_7957Tests {
     void injectVoidThroughClassAttributeWhenDeserializeToPojo() {
 
         XStream xstream = new XStream();
+        /**
+         * This requires to avoid XStream to log a warning "Security framework of XStream instance already initialized"
+         *
+         * An excerpt from XStream 1.4.11 documentation:-
+         *
+         * This method is a pure helper method for XStream 1.4.x. It initializes an XStream instance with a white list of
+         * well-known and simply types of the Java runtime as it is done in XStream 1.5.x by default. This method will do
+         * therefore nothing in XStream 1.5.
+         *
+         */
+        XStream.setupDefaultSecurity(xstream);
 
-        ConversionException conversionException = assertThrows(ConversionException.class,
+        ForbiddenClassException forbiddenClassException = assertThrows(ForbiddenClassException.class,
                      ()->{
                          xstream.fromXML("<string class='void'>Hello, world!</string>");
                      });
-        assertThat(conversionException).hasMessageContaining("Security alert. Unmarshalling rejected");
+        assertThat(forbiddenClassException).hasMessageContaining("void");
     }
 
 }
